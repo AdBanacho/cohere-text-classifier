@@ -1,5 +1,4 @@
 import cohere
-import prompt
 from loadExamples import examples
 from cohere.classify import Example
 
@@ -11,15 +10,6 @@ class CoHere:
     def list_of_examples(self):
         for e in examples():
             self.examples.append(Example(text=e[0], label=e[1]))
-
-    def cohere(self, question):
-        return self.co.generate(
-              model='medium',
-              prompt=prompt.prompt_Steven_qa(question),
-              max_tokens=50,
-              temperature=1,
-              k=0,
-              p=0.75).generations[0].text
 
     def classify(self, inputs):
         return self.co.classify(
